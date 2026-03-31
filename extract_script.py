@@ -75,5 +75,8 @@ def load_to_snowflake():
         ctx.close()
 
 if __name__ == "__main__":
-    if extract_crypto_prices():
-        load_to_snowflake()
+    # 1. Run the extraction
+    extract_crypto_prices()
+    
+    # 2. Run the Snowflake load
+    load_to_snowflake()
