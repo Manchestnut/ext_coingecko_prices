@@ -59,7 +59,12 @@ def load_to_snowflake():
         cs.execute("PUT file://crypto_data.json @crypto_stage AUTO_COMPRESS=TRUE")
 
         print("Copying data into stg_coin_prices...")
-        cs.execute("COPY INTO stg_coin_prices FROM @crypto_stage FILE_FORMAT = (TYPE = 'JSON') PURGE = TRUE")
+        cs.execute("""
+            COPY INTO stg_coin_prices (raw_data)
+            FROM @crypto_stage
+            FILE_FORMAT = (TYPE = 'JSON' STRIP_OUTER_ARRAY = TRUE)
+            PURGE = TRUE
+            """)
 
         print("Load Successful!")
 
