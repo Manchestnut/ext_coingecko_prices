@@ -50,8 +50,8 @@ def load_to_snowflake():
             password=os.getenv('SNOWFLAKE_PASSWORD'),
             account=os.getenv('SNOWFLAKE_ACCOUNT'),
             warehouse='COMPUTE_WH',
-            database='CRYPTO_DB',
-            schema='RAW'
+            database='RAW',
+            schema='COINGECKO'
         )
         cs = ctx.cursor()
 
