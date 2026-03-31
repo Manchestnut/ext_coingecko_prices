@@ -56,12 +56,12 @@ def load_to_snowflake():
         cs = ctx.cursor()
 
         print("Uploading file to Snowflake Stage...")
-        cs.execute("PUT file://crypto_data.json @crypto_stage AUTO_COMPRESS=TRUE")
+        cs.execute("PUT file://crypto_data.json @coingecko_stage AUTO_COMPRESS=TRUE")
 
         print("Copying data into stg_coin_prices...")
         cs.execute("""
             COPY INTO stg_coin_prices (raw_data)
-            FROM @crypto_stage
+            FROM @coingecko_stage
             FILE_FORMAT = (TYPE = 'JSON' STRIP_OUTER_ARRAY = TRUE)
             PURGE = TRUE
             """)
