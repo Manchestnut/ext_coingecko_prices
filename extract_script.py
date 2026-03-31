@@ -10,7 +10,7 @@ def extract_crypto_prices():
     URL = "https://api.coingecko.com/api/v3/simple/price"
     params = {
         'ids': 'bitcoin,ethereum,solana',
-        'vs_currencies': 'usd',
+        'vs_currencies': 'usd,php',
         'include_last_updated_at': 'true'
     }
 
@@ -24,6 +24,7 @@ def extract_crypto_prices():
             records.append({
                 'coin_id': coin_id,
                 'price_usd': values['usd'],
+                'price_php': values['php'],
                 'updated_at_unix': values['last_updated_at'],
                 'extracted_at': datetime.now().isoformat()
             })
